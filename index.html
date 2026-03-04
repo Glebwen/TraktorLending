@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СПУТНИК | Запчасти для тракторов и сельхозтехники</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e2a36;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        :root {
+            --primary-dark: #003a77;
+            --primary: #004c9b;         /* Фирменный синий */
+            --primary-light: #eef4fa;
+            --accent: #5886b4;
+            --gray-bg: #f5f8fc;
+            --border-light: #d9e2ef;
+            --text-dark: #1e2a36;
+            --text-muted: #3a4e62;
+            --white: #ffffff;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.6rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,76,155,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+        .logo span { font-size: 1.3rem; }
+        .logo i { color: var(--primary); font-size: 1.8rem; }
+
+        /* Меню с выпадашками */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        nav > ul > li {
+            position: relative;
+        }
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        nav a i {
+            font-size: 0.75rem;
+            color: var(--primary);
+            transition: transform 0.2s;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        /* выпадающий список */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            min-width: 240px;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1001;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            transition: opacity 0.2s, visibility 0.2s;
+            pointer-events: none;
+        }
+
+        nav > ul > li {
+            position: relative;
+            padding-bottom: 10px; /* Создаем невидимую зону для перехода курсора */
+            margin-bottom: -10px;
+        }
+
+        nav > ul > li:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.5rem 1.5rem;
+            white-space: nowrap;
+            font-weight: 400;
+            display: block; /* Растягиваем на всю ширину */
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--gray-bg);
+        }
+
+        /* Добавляем невидимый мостик для плавного перехода */
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: transparent;
+        }
+        .dropdown-menu li {
+            list-style: none;
+        }
+        .dropdown-menu a {
+            padding: 0.5rem 1.5rem;
+            white-space: nowrap;
+            font-weight: 400;
+        }
+        .dropdown-menu a:hover {
+            background-color: var(--gray-bg);
+        }
+
+        .header-contacts {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+        .header-phones {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+            text-align: right;
+        }
+        .header-phones a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .header-phones a:hover {
+            color: var(--primary);
+        }
+        .small-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.1s;
+            border: 1px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ===== СЛАЙДЕР ===== */
+        .slider-section {
+            padding: 0;
+            background-color: var(--primary) !important;
+            overflow: hidden;
+        }
+        .slider {
+            position: relative;
+            color: white;
+        }
+        .slide {
+            display: none;
+            padding: 4rem 0;
+        }
+        .slide.active {
+            display: block;
+        }
+        .slide .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .slide-content {
+            flex: 1 1 300px;
+        }
+        .slide-content h1 {
+            color: white;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .slide-content p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .slide-content .cta-button {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid white;
+            padding: 12px 32px;
+        }
+        .slide-content .cta-button:hover {
+            background-color: rgba(255,255,255,0.9);
+        }
+        .slide-image {
+            flex: 1 1 300px;
+            text-align: center;
+        }
+        .slide-image i {
+            font-size: 180px;
+            color: rgba(255,255,255,0.8);
+        }
+        .slide-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+        }
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .dot.active {
+            background-color: white;
+        }
+
+        /* ===== ОБЩИЕ СЕКЦИИ ===== */
+        section {
+            padding: 5rem 0;
+        }
+        section:nth-child(even) {
+            background-color: var(--gray-bg);
+        }
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        /* Преимущества */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .advantage-card {
+            background: var(--white);
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,76,155,0.02);
+        }
+        .advantage-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .advantage-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        .advantage-card p {
+            color: var(--text-muted);
+        }
+
+        /* Отзывы (скрины/видео) */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        .review-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .review-card:hover {
+            box-shadow: 0 15px 30px rgba(0,76,155,0.08);
+        }
+        .review-media {
+            height: 180px;
+            background-color: #e6f0fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .review-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .review-card p {
+            padding: 1.5rem 1.5rem 1rem;
+            color: var(--text-dark);
+        }
+        .review-author {
+            padding: 0 1.5rem 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Формы */
+        .form-section {
+            background-color: var(--primary);
+            color: white;
+        }
+        .form-section h2 {
+            color: white;
+        }
+        .form-section .section-description {
+            color: rgba(255,255,255,0.85);
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background-color: #fafcfc;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,76,155,0.08);
+        }
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .checkbox input {
+            width: auto;
+        }
+        .form-container .cta-button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 14px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #002b54;
+            color: #d1e0f0;
+            padding: 3rem 0 2rem;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-column h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-column ul {
+            list-style: none;
+        }
+        .footer-column li {
+            margin-bottom: 0.7rem;
+        }
+        .footer-column a {
+            color: #b8d4f0;
+            text-decoration: none;
+        }
+        .footer-column a:hover {
+            color: white;
+        }
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.85rem;
+            color: #9bb9d9;
+        }
+
+        @media (max-width: 992px) {
+            .header-container { flex-direction: column; align-items: stretch; }
+            .header-contacts { justify-content: space-between; }
+            nav ul { justify-content: center; }
+            .slide .container { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 768px) {
+            nav ul { 
+                gap: 1rem; 
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav > ul > li { 
+                width: 100%; 
+                padding-bottom: 0;
+            }
+            .dropdown-menu { 
+                position: static; 
+                visibility: visible;
+                opacity: 1;
+                pointer-events: all;
+                display: none;
+                margin-left: 1rem;
+                box-shadow: none;
+                border: none;
+                padding: 0.5rem 0;
+            }
+            nav > ul > li:hover .dropdown-menu { 
+                display: block; 
+            }
+            .dropdown-menu::before {
+                display: none;
+            }
+            .header-contacts { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            .header-phones { 
+                text-align: left; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-cogs"></i>
+                <span>СПУТНИК</span>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#">Тракторные запчасти <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Двигатель и КПП</a></li>
+                            <li><a href="#">Мосты и трансмиссия</a></li>
+                            <li><a href="#">Сцепление</a></li>
+                            <li><a href="#">Электрооборудование</a></li>
+                            <li><a href="#">Куна, ножи, копалки</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Запчасти для с/х техники <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Косилки и режущие аппараты</a></li>
+                            <li><a href="#">Грабли и ворошилки</a></li>
+                            <li><a href="#">Пресс-подборщики</a></li>
+                            <li><a href="#">Щетки и роторы</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Гидравлика <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Насосы НШ</a></li>
+                            <li><a href="#">РВД</a></li>
+                            <li><a href="#">Гидроцилиндры</a></li>
+                            <li><a href="#">Фитинги и ремкомплекты</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Фильтры</a></li>
+                </ul>
+            </nav>
+            <div class="header-contacts">
+                <div class="header-phones">
+                    <a href="tel:+73952559088">+7 (3952) 55-90-88 <span class="small-text">доб 4</span></a>
+                    <a href="tel:+79025661917">+7 (902) 566-19-17</a>
+                    <a href="tel:+79914326540">+7 (991) 432-65-40</a>
+                </div>
+                <a href="#order-call" class="cta-button">Заказать звонок</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Слайдер -->
+    <section class="slider-section">
+        <div class="slider">
+            <!-- Слайд 1 -->
+            <div class="slide active" id="slide1">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Тракторные запчасти</h1>
+                        <p>Всегда в наличии: косилки, режущие аппараты, грабли, куны, картофелекопалки, ножи и запчасти к ним.</p>
+                        <a href="#order-request" class="cta-button">Отправить заявку</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="images/traktor.jpg" alt="Трактор в поле">
+                    </div>
+                </div>
+            </div>
+            <!-- Слайд 2 -->
+            <div class="slide" id="slide2">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Запчасти для сельхозтехники</h1>
+                        <p>Широкий ассортимент для косилок, грабель, пресс-подборщиков и другого оборудования.</p>
+                        <a href="#order-request" class="cta-button">Отправить заявку</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="images/ch.jpg" alt="Сельхозтехника">
+                    </div>
+                </div>
+            </div>
+            <!-- Слайд 3 -->
+            <div class="slide" id="slide3">
+                <div class="container">
+                    <div class="slide-content">
+                        <h1>Запчасти спецтехники</h1>
+                        <p>Гидравлика, фильтры, навесное оборудование для погрузчиков и экскаваторов.</p>
+                        <a href="#order-request" class="cta-button">Отправить заявку</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="images/spec.png" alt="Спецтехника">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-controls">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества (1,2,3) -->
+    <section>
+        <div class="container">
+            <h2>Наши преимущества</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="number" style="color: #3a4e62;">1</div>
+                    <h3>Склад в Иркутске</h3>
+                    <p>Всегда в наличии популярные позиции. Отгрузка день в день.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="number" style="color: #3a4e62;">2</div>
+                    <h3>Команда специалистов</h3>
+                    <p>Поможем подобрать аналоги и редкие запчасти для любой техники.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="number" style="color: #3a4e62;">3</div>
+                    <h3>Доставка по всей России</h3>
+                    <p>Собственная логистика и партнеры с ТК. Отправляем быстро.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы (скрины, видео) -->
+    <section>
+        <div class="container">
+            <h2>Отзывы наших клиентов</h2>
+            <p class="section-description">Видео и скриншоты благодарственных писем</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-media"><i class="fas fa-file-image"></i></div>
+                    <p>«Огромное спасибо за быструю поставку гидроцилиндров! Всё подошло идеально.»</p>
+                    <div class="review-author">ООО "Рассвет"</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-media"><i class="fas fa-video"></i></div>
+                    <p>«Видеообзор полученных запчастей. Качество отличное, рекомендуем!»</p>
+                    <div class="review-author">КФХ "Сибиряк"</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-media"><i class="fas fa-file-pdf"></i></div>
+                    <p>«Благодарственное письмо за сотрудничество. Всегда оперативно и честно.»</p>
+                    <div class="review-author">АО "Агро-Плюс"</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма "Заказать звонок" -->
+    <section id="order-call" class="form-section">
+        <div class="container">
+            <h2>Заказать звонок</h2>
+            <p class="section-description">Оставьте номер — мы перезвоним в рабочее время</p>
+            <div class="form-container">
+                <form id="callForm">
+                    <div class="form-group">
+                        <label for="call-name">Имя *</label>
+                        <input type="text" id="call-name" required placeholder="Александр">
+                    </div>
+                    <div class="form-group">
+                        <label for="call-phone">Телефон *</label>
+                        <input type="tel" id="call-phone" required placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="call-consent" checked required>
+                        <label for="call-consent">Согласие на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="cta-button">Заказать звонок</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма "Отправить заявку" -->
+    <section id="order-request" class="form-section" style="background-color: var(--gray-bg); color: initial;">
+        <div class="container">
+            <h2 style="color: var(--primary);">Отправить заявку</h2>
+            <p class="section-description" style="color: #3a4e62;">Заполните форму, мы свяжемся для уточнения деталей</p>
+            <div class="form-container">
+                <form id="requestForm">
+                    <div class="form-group">
+                        <label for="req-name">Имя *</label>
+                        <input type="text" id="req-name" required placeholder="Александр">
+                    </div>
+                    <div class="form-group">
+                        <label for="req-phone">Телефон *</label>
+                        <input type="tel" id="req-phone" required placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div class="form-group">
+                        <label for="req-message">Опишите ваш запрос</label>
+                        <textarea id="req-message" rows="3" placeholder="Модель техники, артикулы, необходимость подбора..."></textarea>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="req-consent" checked required>
+                        <label for="req-consent">Согласие на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="cta-button">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер с контактами и адресом -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>СПУТНИК</h3>
+                    <p style="color: #b8d4f0;">Вместе мы вращаем мир! Поставки подшипников и запчастей с 2003 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone-alt"></i> +7 (3952) 55-90-88 доб 4</li>
+                        <li><i class="fas fa-phone-alt"></i> +7 (902) 566-19-17</li>
+                        <li><i class="fas fa-phone-alt"></i> +7 (991) 432-65-40</li>
+                        <li><i class="fas fa-envelope"></i> info@traktor38.ru</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Иркутск, ул. Трактовая, 18Д</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="#">Ассортимент товаров</a></li>
+                        <li><a href="#">Сфера применения</a></li>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Наши клиенты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2003–2025 ГК «Спутник» | Иркутск, ул. Трактовая, 18Д</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Слайдер
+        let slideIndex = 1;
+        showSlide(slideIndex);
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            let slides = document.querySelectorAll('.slide');
+            let dots = document.querySelectorAll('.dot');
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            slides[slideIndex-1].classList.add('active');
+            dots[slideIndex-1].classList.add('active');
+        }
+
+        // Автопереключение (опционально)
+        setInterval(() => {
+            slideIndex++;
+            showSlide(slideIndex);
+        }, 6000);
+
+        // Плавный скролл
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({ top: targetElement.offsetTop - 70, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Обработка форм
+        document.getElementById('callForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('call-name').value;
+            alert(`Спасибо, ${name}! Мы перезвоним вам в ближайшее время.`);
+            this.reset();
+        });
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('req-name').value;
+            alert(`Спасибо, ${name}! Ваша заявка принята, мы свяжемся с вами для уточнения.`);
+            this.reset();
+        });
+
+        // Актуальный год
+        document.querySelector('.copyright p').innerHTML = `© 2003–${new Date().getFullYear()} ГК «Спутник» | Иркутск, ул. Трактовая, 18Д`;
+    </script>
+</body>
+</html>
