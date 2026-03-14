@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Мосты и трансмиссия для тракторов | СПУТНИК</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: #1e2a36;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        :root {
+            --primary-dark: #003a77;
+            --primary: #004c9b;
+            --primary-light: #eef4fa;
+            --accent: #5886b4;
+            --gray-bg: #f5f8fc;
+            --border-light: #d9e2ef;
+            --text-dark: #1e2a36;
+            --text-muted: #3a4e62;
+            --white: #ffffff;
+        }
+
+        /* ===== ШАПКА ===== */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.6rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,76,155,0.05);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        nav > ul > li {
+            position: relative;
+        }
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        nav a i {
+            font-size: 0.75rem;
+            color: var(--primary);
+            transition: transform 0.2s;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 58, 119, 0.15);
+            min-width: 260px;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1001;
+            padding: 0.8rem 0;
+            margin-top: 0.5rem;
+            transition: opacity 0.2s, visibility 0.2s;
+            pointer-events: none;
+        }
+
+        nav > ul > li {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: -10px;
+        }
+
+        nav > ul > li:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.7rem 1.8rem;
+            white-space: nowrap;
+            font-weight: 500;
+            display: block;
+            color: var(--text-dark);
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-left-color: var(--primary);
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: transparent;
+        }
+
+        .header-contacts {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+        .header-phones {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+            text-align: right;
+        }
+        .header-phones a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .header-phones a:hover {
+            color: var(--primary);
+        }
+        .small-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s, transform 0.1s;
+            border: 1px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Бургер-меню */
+        .burger-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+            order: 3;
+        }
+
+        /* Затемнение фона */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            padding-right: 2rem;
+        }
+
+        .modal .section-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .modal .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        
+        .modal .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .modal .form-group input,
+        .modal .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background-color: #fafcfc;
+        }
+        
+        .modal .form-group input:focus,
+        .modal .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,76,155,0.08);
+        }
+        
+        .modal .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .modal .checkbox input {
+            width: auto;
+        }
+        
+        .modal .cta-button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 14px;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* КОНТЕНТ СТРАНИЦЫ */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .breadcrumbs {
+            margin-bottom: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .breadcrumbs a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        /* Сетка товаров */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,76,155,0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,76,155,0.15);
+            border-color: var(--primary);
+        }
+
+        .product-image {
+            height: 200px;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 4rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .product-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .product-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .product-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Категории */
+        .categories-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #002b54;
+            color: #d1e0f0;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #b8d4f0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .contact-info i {
+            width: 20px;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.9rem;
+            color: #9bb9d9;
+        }
+
+        /* ===== АДАПТАЦИЯ ===== */
+        @media (max-width: 992px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .burger-icon {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+                z-index: 1002;
+                overflow-y: auto;
+                padding: 2rem 1.5rem;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            nav > ul > li {
+                width: 100%;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+            
+            nav > ul > li > a {
+                font-size: 1.1rem;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0.5rem 0;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                visibility: visible;
+                opacity: 1;
+                pointer-events: all;
+                display: none;
+                box-shadow: none;
+                border: 1px solid var(--border-light);
+                padding: 0.5rem 0 0.5rem 1rem;
+                margin-top: 0.5rem;
+                background-color: #f9f9f9;
+                min-width: 100%;
+            }
+            
+            .dropdown-menu::before {
+                display: none;
+            }
+            
+            .dropdown-menu a {
+                padding: 0.5rem 1rem;
+            }
+            
+            nav > ul > li.active .dropdown-menu {
+                display: block;
+            }
+            
+            nav > ul > li > a i {
+                transition: transform 0.3s;
+            }
+            
+            nav > ul > li.active > a i {
+                transform: rotate(180deg);
+            }
+            
+            .header-contacts {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.8rem;
+                margin-left: auto;
+            }
+            
+            .header-phones {
+                text-align: right;
+                font-size: 0.85rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-contacts {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                order: 4;
+            }
+            
+            .header-phones {
+                flex-direction: row;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Спутник Логотип">
+                </a>
+            </div>
+            
+            <!-- Бургер-иконка -->
+            <div class="burger-icon" id="burgerIcon">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <!-- Навигация -->
+            <nav id="navMenu">
+                <ul>
+                    <li class="menu-item">
+                        <a href="#" class="dropdown-toggle">Тракторные запчасти <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="engine.html">Двигатель и КПП</a></li>
+                            <li><a href="axles.html">Мосты и трансмиссия</a></li>
+                            <li><a href="clutch.html">Сцепление</a></li>
+                            <li><a href="electrics.html">Электрооборудование</a></li>
+                            <li><a href="attachments.html">Куна, ножи, копалки</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="dropdown-toggle">Запчасти для с/х техники <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../agricultural/mowers.html">Косилки и режущие аппараты</a></li>
+                            <li><a href="../agricultural/rakes.html">Грабли и ворошилки</a></li>
+                            <li><a href="../agricultural/balers.html">Пресс-подборщики</a></li>
+                            <li><a href="../agricultural/brushes.html">Щетки и роторы</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="dropdown-toggle">Гидравлика <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../hydraulics/pumps.html">Насосы НШ</a></li>
+                            <li><a href="../hydraulics/hoses.html">РВД</a></li>
+                            <li><a href="../hydraulics/cylinders.html">Гидроцилиндры</a></li>
+                            <li><a href="../hydraulics/fittings.html">Фитинги и ремкомплекты</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../filters.html">Фильтры</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Затемнение фона для мобильного меню -->
+            <div class="overlay" id="overlay"></div>
+            
+            <div class="header-contacts">
+                <div class="header-phones">
+                    <a href="tel:+73952559088">+7 (3952) 55-90-88 <span class="small-text">доб 4</span></a>
+                    <a href="tel:+79025661917">+7 (902) 566-19-17</a>
+                    <a href="tel:+79914326540">+7 (991) 432-65-40</a>
+                </div>
+                <a href="#" class="cta-button" id="callButton">Заказать звонок</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="universalModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeModal">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="../index.html">Главная</a> / <a href="../index.html">Тракторные запчасти</a> / Мосты и трансмиссия
+            </div>
+            <h1>Мосты и трансмиссия для тракторов</h1>
+            <p>Передние и задние мосты, редукторы, карданные валы, дифференциалы и другие элементы трансмиссии для тракторов МТЗ, ЮМЗ, Кировец</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="products-grid">
+            <!-- Карточка товара 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Задний мост МТЗ-80/82</h3>
+                    <p>Задний мост в сборе для тракторов МТЗ-80/82. Главная передача, дифференциал, полуоси.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 180 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка товара 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Передний мост МТЗ-82</h3>
+                    <p>Передний ведущий мост для тракторов МТЗ-82. В сборе с поворотными кулаками.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 145 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка товара 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Карданный вал МТЗ-80</h3>
+                    <p>Карданный вал от КПП к заднему мосту. С крестовинами, новый.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 25 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка товара 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-gear"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Редуктор заднего моста</h3>
+                    <p>Главная передача заднего моста МТЗ-80/82. Пара конических шестерен.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 35 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка товара 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-circle"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Дифференциал МТЗ-80</h3>
+                    <p>Дифференциал заднего моста в сборе с шестернями. Новый.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 42 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка товара 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-arrows-alt-h"></i>
+                </div>
+                <div class="product-content">
+                    <h3>Полуось МТЗ-80</h3>
+                    <p>Полуось заднего моста правая/левая. Новая, оригинал.</p>
+                    <div class="product-footer">
+                        <span class="product-price">от 12 000 ₽</span>
+                        <a href="#" class="product-btn request-btn">Заказать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Описание категории -->
+        <div style="background: var(--primary-light); padding: 2.5rem; border-radius: 20px; margin: 3rem 0;">
+            <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem;">О категории</h3>
+            <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem;">Трансмиссия и ходовая часть — одни из самых нагруженных узлов трактора. От их исправности зависит не только комфорт работы, но и безопасность, а также производительность техники. В нашем каталоге представлены оригинальные запчасти и качественные аналоги для ремонта мостов и трансмиссии тракторов МТЗ, ЮМЗ, Кировец, а также импортной техники.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Все детали проходят входной контроль. На популярные позиции действует гарантия. Наши специалисты помогут подобрать необходимые запчасти по каталожным номерам или аналогам.</p>
+        </div>
+
+        <div class="categories-section">
+            <h2 class="section-title">Другие категории тракторных запчастей</h2>
+            <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <a href="engine.html" class="product-card" style="text-decoration: none; text-align: center;">
+                    <div class="product-image" style="height: 150px;">
+                        <i class="fas fa-engine"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Двигатель и КПП</h3>
+                    </div>
+                </a>
+                <a href="clutch.html" class="product-card" style="text-decoration: none; text-align: center;">
+                    <div class="product-image" style="height: 150px;">
+                        <i class="fas fa-clutch"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Сцепление</h3>
+                    </div>
+                </a>
+                <a href="electrics.html" class="product-card" style="text-decoration: none; text-align: center;">
+                    <div class="product-image" style="height: 150px;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Электрооборудование</h3>
+                    </div>
+                </a>
+                <a href="attachments.html" class="product-card" style="text-decoration: none; text-align: center;">
+                    <div class="product-image" style="height: 150px;">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Куна, ножи, копалки</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>СПУТНИК</h3>
+                    <p style="color: #b8d4f0; line-height: 1.6;">Запчасти для сельхоз техники с 2003 года. Надежность и качество. Работаем по всей России.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone-alt"></i> +7 (3952) 55-90-88 доб 4</li>
+                        <li><i class="fas fa-phone-alt"></i> +7 (902) 566-19-17</li>
+                        <li><i class="fas fa-phone-alt"></i> +7 (991) 432-65-40</li>
+                        <li><i class="fas fa-envelope"></i> info@traktor38.ru</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Иркутск, ул. Трактовая, 18Д</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="../catalog.html">Каталог товаров</a></li>
+                        <li><a href="../delivery.html">Доставка и оплата</a></li>
+                        <li><a href="../clients.html">Наши клиенты</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2003–2025 ГК «Спутник» | Иркутск, ул. Трактовая, 18Д</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // МОДАЛЬНОЕ ОКНО
+        const modal = document.getElementById('universalModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        
+        function openModal(formType) {
+            if (formType === 'call') {
+                modalContent.innerHTML = `
+                    <h2>Заказать звонок</h2>
+                    <p class="section-description">Оставьте номер — мы перезвоним в рабочее время</p>
+                    <form id="callForm">
+                        <div class="form-group">
+                            <label for="call-name">Имя *</label>
+                            <input type="text" id="call-name" required placeholder="Александр">
+                        </div>
+                        <div class="form-group">
+                            <label for="call-phone">Телефон *</label>
+                            <input type="tel" id="call-phone" required placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="call-consent" checked required>
+                            <label for="call-consent">Согласие на обработку персональных данных</label>
+                        </div>
+                        <button type="submit" class="cta-button">Заказать звонок</button>
+                    </form>
+                `;
+            } else if (formType === 'request') {
+                modalContent.innerHTML = `
+                    <h2>Оформить заказ</h2>
+                    <p class="section-description">Заполните форму, мы свяжемся для уточнения деталей</p>
+                    <form id="requestForm">
+                        <div class="form-group">
+                            <label for="req-name">Имя *</label>
+                            <input type="text" id="req-name" required placeholder="Александр">
+                        </div>
+                        <div class="form-group">
+                            <label for="req-phone">Телефон *</label>
+                            <input type="tel" id="req-phone" required placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group">
+                            <label for="req-message">Опишите ваш запрос</label>
+                            <textarea id="req-message" rows="3" placeholder="Модель техники, артикулы, необходимость подбора..."></textarea>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="req-consent" checked required>
+                            <label for="req-consent">Согласие на обработку персональных данных</label>
+                        </div>
+                        <button type="submit" class="cta-button">Оформить заказ</button>
+                    </form>
+                `;
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            if (formType === 'call') {
+                document.getElementById('callForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('call-name').value;
+                    alert(`Спасибо, ${name}! Мы перезвоним вам в ближайшее время.`);
+                    this.reset();
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            } else if (formType === 'request') {
+                document.getElementById('requestForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('req-name').value;
+                    alert(`Спасибо, ${name}! Ваш заказ принят, мы свяжемся с вами для уточнения.`);
+                    this.reset();
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+        }
+        
+        document.getElementById('callButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('call');
+        });
+        
+        document.querySelectorAll('.request-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal('request');
+            });
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // МОБИЛЬНОЕ МЕНЮ
+        const burgerIcon = document.getElementById('burgerIcon');
+        const navMenu = document.getElementById('navMenu');
+        const overlay = document.getElementById('overlay');
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        burgerIcon.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        overlay.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        menuItems.forEach(item => {
+            const link = item.querySelector('.dropdown-toggle');
+            if (link) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        item.classList.toggle('active');
+                    }
+                });
+            }
+        });
+
+        // Актуальный год в футере
+        const yearSpan = document.querySelector('.copyright p');
+        if (yearSpan) {
+            yearSpan.innerHTML = `© 2003–${new Date().getFullYear()} ГК «Спутник» | Иркутск, ул. Трактовая, 18Д`;
+        }
+    </script>
+</body>
+</html>

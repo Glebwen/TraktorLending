@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Стили остаются практически такими же, только добавляем новые */
         * {
             margin: 0;
             padding: 0;
@@ -60,17 +61,12 @@
             gap: 1rem;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -0.5px;
+        /* ПРАВКА 1: Логотип */
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
         }
-        .logo span { font-size: 1.3rem; }
-        .logo i { color: var(--primary); font-size: 1.8rem; }
 
         /* Меню с выпадашками */
         .nav-menu {
@@ -107,16 +103,17 @@
         nav a:hover {
             color: var(--primary);
         }
-        /* выпадающий список */
+        
+        /* ПРАВКА 3: Более контрастное выпадающее меню */
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
             background: white;
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            min-width: 240px;
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 58, 119, 0.15);
+            min-width: 260px;
             visibility: hidden;
             opacity: 0;
             z-index: 1001;
@@ -144,17 +141,20 @@
         }
 
         .dropdown-menu a {
-            padding: 0.5rem 1.5rem;
+            padding: 0.7rem 1.8rem;
             white-space: nowrap;
-            font-weight: 400;
+            font-weight: 500;
             display: block;
+            color: var(--text-dark);
+            border-left: 3px solid transparent;
         }
 
         .dropdown-menu a:hover {
-            background-color: var(--gray-bg);
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-left-color: var(--primary);
         }
 
-        /* Добавляем невидимый мостик для плавного перехода */
         .dropdown-menu::before {
             content: '';
             position: absolute;
@@ -209,6 +209,30 @@
         .cta-button:hover {
             background-color: var(--primary-dark);
             transform: translateY(-1px);
+        }
+
+        /* ПРАВКА 8: Эффект блеска для кнопок на слайдере */
+        .slide .cta-button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: left 0.6s ease-in-out;
+            z-index: -1;
+        }
+
+        .slide .cta-button:hover::after {
+            left: 120%;
         }
 
         /* Бургер-меню */
@@ -337,236 +361,414 @@
             margin-top: 0.5rem;
         }
 
-        /* ===== СЛАЙДЕР ===== */
+        /* ===== СЛАЙДЕР (ПРАВКА 2) ===== */
         .slider-section {
             padding: 0;
-            background-color: var(--primary) !important;
+            width: 100%;
             overflow: hidden;
         }
         .slider {
             position: relative;
             color: white;
+            width: 100%;
         }
         .slide {
             display: none;
-            padding: 4rem 0;
+            min-height: 600px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
         }
         .slide.active {
             display: block;
         }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
         .slide .container {
+            position: relative;
+            z-index: 2;
+            height: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-            flex-wrap: wrap;
+            justify-content: flex-start;
+            padding-top: 40px; /* ДОБАВЛЕНО: отступ сверху для всего контейнера */
         }
         .slide-content {
-            flex: 1 1 300px;
+            max-width: 600px;
+            color: white;
+            margin-top: -20px; /* ДОБАВЛЕНО: небольшая корректировка для точной центровки */
         }
         .slide-content h1 {
             color: white;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
         .slide-content p {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.2rem;
+            color: rgba(255,255,255,0.95);
+            font-size: 1.3rem;
             margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         .slide-content .cta-button {
             background-color: white;
             color: var(--primary);
             border: 1px solid white;
-            padding: 12px 32px;
+            padding: 14px 36px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .slide-content .cta-button:hover {
             background-color: rgba(255,255,255,0.9);
         }
-        .slide-image {
-            flex: 1 1 300px;
-            text-align: center;
+        #slide1 {
+            background-image: url('https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
         }
-        .slide-image i {
-            font-size: 180px;
-            color: rgba(255,255,255,0.8);
+        #slide2 {
+            background-image: url('https://images.unsplash.com/photo-1598046174036-9eeba5a2f6f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
         }
-        .slide-image img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+        #slide3 {
+            background-image: url('https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
         }
+
         .slider-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            z-index: 3;
         }
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background-color: rgba(255,255,255,0.5);
             border-radius: 50%;
             cursor: pointer;
             transition: background 0.2s;
+            border: 2px solid transparent;
         }
         .dot.active {
             background-color: white;
+            border-color: var(--primary);
         }
 
-        /* ===== ОБЩИЕ СЕКЦИИ ===== */
-        section {
-            padding: 5rem 0;
+        /* ===== СЕКЦИИ СО СТАТЬЯМИ ===== */
+        .article-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-light);
         }
-        section:nth-child(even) {
-            background-color: var(--gray-bg);
+        .article-section:last-of-type {
+            border-bottom: none;
         }
-        h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .section-description {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 3rem;
-        }
-
-        /* Преимущества */
-        .advantages-grid {
+        .article-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
         }
-        .advantage-card {
-            background: var(--white);
+        .article-content h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        .article-image {
+            background-color: var(--primary-light);
+            border-radius: 12px;
             padding: 2rem;
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,76,155,0.02);
-        }
-        .advantage-card .number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-light);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-        .advantage-card h3 {
-            font-size: 1.4rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-        }
-        .advantage-card p {
-            color: var(--text-muted);
-        }
-
-        /* Отзывы */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-        }
-        .review-card {
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: box-shadow 0.2s;
-        }
-        .review-card:hover {
-            box-shadow: 0 15px 30px rgba(0,76,155,0.08);
-        }
-        .review-media {
-            height: 180px;
-            background-color: #e6f0fa;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
-            font-size: 3rem;
-            border-bottom: 1px solid var(--border-light);
+            font-size: 5rem;
+            border: 1px solid var(--border-light);
         }
-        .review-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .article-image img {
+            max-width: 100%;
+            border-radius: 8px;
         }
-        .review-card p {
-            padding: 1.5rem 1.5rem 1rem;
-            color: var(--text-dark);
+
+        /* ===== УЛУЧШЕННЫЕ ПРЕИМУЩЕСТВА ===== */
+        .advantages-section {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--white), var(--gray-bg));
         }
-        .review-author {
-            padding: 0 1.5rem 1.5rem;
-            font-weight: 600;
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .advantage-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 76, 155, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 76, 155, 0.15);
+            border-color: var(--primary);
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .advantage-card:hover::before {
+            opacity: 1;
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card:hover .advantage-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .advantage-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* ===== УЛУЧШЕННЫЕ ОТЗЫВЫ ===== */
+        .reviews-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--gray-bg) 0%, var(--white) 100%);
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .reviews-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .reviews-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 76, 155, 0.05);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 76, 155, 0.15);
+        }
+
+        .review-media {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), #d4e4f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3.5rem;
+            border-bottom: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-media::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .review-card:hover .review-media::after {
+            transform: translateX(100%);
+        }
+
+        .review-card p {
+            padding: 2rem 2rem 1rem;
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .review-author {
+            padding: 0 2rem 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-author::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 2px;
         }
 
         /* Футер */
         footer {
             background-color: #002b54;
             color: #d1e0f0;
-            padding: 3rem 0 2rem;
+            padding: 4rem 0 2rem;
         }
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
         }
         .footer-column h3 {
             color: white;
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
+            font-weight: 600;
         }
         .footer-column ul {
             list-style: none;
         }
         .footer-column li {
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.8rem;
         }
         .footer-column a {
             color: #b8d4f0;
             text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
         }
         .footer-column a:hover {
             color: white;
+            padding-left: 5px;
         }
         .contact-info li {
             display: flex;
             align-items: center;
             gap: 12px;
         }
+        .contact-info i {
+            width: 20px;
+            color: var(--accent);
+        }
         .copyright {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #9bb9d9;
         }
 
-        /* ===== АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ ===== */
+        /* ===== АДАПТАЦИЯ ===== */
         @media (max-width: 992px) {
-            .header-container { 
-                flex-direction: row; 
-                flex-wrap: wrap;
-            }
-            
-            .slide .container { 
-                flex-direction: column; 
-                text-align: center; 
-            }
-            
             .slide-content h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+            .article-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .advantages-grid,
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -620,10 +822,10 @@
                 pointer-events: all;
                 display: none;
                 box-shadow: none;
-                border: none;
+                border: 1px solid var(--border-light);
                 padding: 0.5rem 0 0.5rem 1rem;
-                margin-top: 0;
-                background-color: transparent;
+                margin-top: 0.5rem;
+                background-color: #f9f9f9;
                 min-width: 100%;
             }
             
@@ -632,7 +834,7 @@
             }
             
             .dropdown-menu a {
-                padding: 0.5rem 0;
+                padding: 0.5rem 1rem;
             }
             
             nav > ul > li.active .dropdown-menu {
@@ -659,23 +861,6 @@
                 font-size: 0.85rem;
             }
             
-            .header-phones a {
-                white-space: nowrap;
-            }
-            
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .logo span {
-                font-size: 1.1rem;
-            }
-            
-            .cta-button {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-            }
-            
             .overlay {
                 display: none;
                 position: fixed;
@@ -691,24 +876,17 @@
                 display: block;
             }
             
-            .header-container {
-                gap: 0.5rem;
-            }
-            
             .slide {
-                padding: 2rem 0;
+                min-height: 450px;
             }
-            
+            .slide .container {
+                padding-top: 60px; /* ДОБАВЛЕНО: чуть больше отступа на мобильных */
+            }
             .slide-content h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
-            
             .slide-content p {
-                font-size: 1rem;
-            }
-            
-            .slide-image i {
-                font-size: 120px;
+                font-size: 1.1rem;
             }
             
             section {
@@ -716,50 +894,28 @@
             }
             
             h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
-            
-            .section-description {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-            }
-            
-            .advantages-grid {
-                gap: 1rem;
+        }
+        
+        @media (max-width: 640px) {
+            .advantages-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
             
             .advantage-card {
-                padding: 1.5rem;
+                padding: 2rem;
             }
             
-            .advantage-card h3 {
-                font-size: 1.2rem;
+            .section-title {
+                font-size: 2rem;
             }
             
-            .reviews-grid {
-                gap: 1rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .modal-content {
-                padding: 1.5rem;
-                width: 95%;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-            
-            .modal h2 {
-                font-size: 1.5rem;
-            }
-            
-            .modal-close {
-                right: 1rem;
-                top: 0.8rem;
-                font-size: 1.8rem;
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
             }
         }
         
@@ -778,50 +934,29 @@
                 flex-wrap: wrap;
             }
             
-            .header-phones a {
-                font-size: 0.8rem;
+            .slide {
+                min-height: 350px;
             }
-            
-            .header-phones .small-text {
-                display: none;
+            .slide .container {
+                padding-top: 70px; /* ДОБАВЛЕНО: еще больше отступа на маленьких экранах */
             }
-            
             .slide-content h1 {
                 font-size: 1.5rem;
             }
-            
-            .slide-image i {
-                font-size: 80px;
+            .slide-content p {
+                font-size: 1rem;
             }
-            
-            .slider-controls {
-                bottom: 10px;
-            }
-            
-            .dot {
-                width: 8px;
-                height: 8px;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            .advantage-card .number {
+            .review-media {
+                height: 160px;
                 font-size: 2.5rem;
             }
             
-            .review-media {
-                height: 140px;
-                font-size: 2rem;
+            .review-card p {
+                padding: 1.5rem 1.5rem 0.5rem;
             }
             
-            .modal .checkbox {
-                align-items: flex-start;
-            }
-            
-            .modal .checkbox input {
-                margin-top: 0.2rem;
+            .review-author {
+                padding: 0 1.5rem 1.5rem;
             }
         }
     </style>
@@ -830,51 +965,47 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <i class="fas fa-cogs"></i>
-                <span>СПУТНИК</span>
+                <img src="images/logo.png" alt="Спутник Логотип">
             </div>
             
-            <!-- Бургер-иконка -->
             <div class="burger-icon" id="burgerIcon">
                 <i class="fas fa-bars"></i>
             </div>
             
-            <!-- Навигация -->
             <nav id="navMenu">
                 <ul>
                     <li class="menu-item">
                         <a href="#" class="dropdown-toggle">Тракторные запчасти <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Двигатель и КПП</a></li>
-                            <li><a href="#">Мосты и трансмиссия</a></li>
-                            <li><a href="#">Сцепление</a></li>
-                            <li><a href="#">Электрооборудование</a></li>
-                            <li><a href="#">Куна, ножи, копалки</a></li>
+                            <li><a href="tractor/engine.html">Двигатель и КПП</a></li>
+                            <li><a href="tractor/axles.html">Мосты и трансмиссия</a></li>
+                            <li><a href="tractor/clutch.html">Сцепление</a></li>
+                            <li><a href="tractor/electrics.html">Электрооборудование</a></li>
+                            <li><a href="tractor/attachments.html">Куна, ножи, копалки</a></li>
                         </ul>
                     </li>
                     <li class="menu-item">
                         <a href="#" class="dropdown-toggle">Запчасти для с/х техники <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Косилки и режущие аппараты</a></li>
-                            <li><a href="#">Грабли и ворошилки</a></li>
-                            <li><a href="#">Пресс-подборщики</a></li>
-                            <li><a href="#">Щетки и роторы</a></li>
+                            <li><a href="agricultural/mowers.html">Косилки и режущие аппараты</a></li>
+                            <li><a href="agricultural/rakes.html">Грабли и ворошилки</a></li>
+                            <li><a href="agricultural/balers.html">Пресс-подборщики</a></li>
+                            <li><a href="agricultural/brushes.html">Щетки и роторы</a></li>
                         </ul>
                     </li>
                     <li class="menu-item">
                         <a href="#" class="dropdown-toggle">Гидравлика <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Насосы НШ</a></li>
-                            <li><a href="#">РВД</a></li>
-                            <li><a href="#">Гидроцилиндры</a></li>
-                            <li><a href="#">Фитинги и ремкомплекты</a></li>
+                            <li><a href="hydraulics/pumps.html">Насосы НШ</a></li>
+                            <li><a href="hydraulics/hoses.html">РВД</a></li>
+                            <li><a href="hydraulics/cylinders.html">Гидроцилиндры</a></li>
+                            <li><a href="hydraulics/fittings.html">Фитинги и ремкомплекты</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Фильтры</a></li>
+                    <li><a href="filters.html">Фильтры</a></li>
                 </ul>
             </nav>
             
-            <!-- Затемнение фона для мобильного меню -->
             <div class="overlay" id="overlay"></div>
             
             <div class="header-contacts">
@@ -888,55 +1019,39 @@
         </div>
     </header>
 
-    <!-- МОДАЛЬНОЕ ОКНО (УНИВЕРСАЛЬНОЕ) -->
     <div id="universalModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" id="closeModal">&times;</span>
-            <div id="modalContent">
-                <!-- Сюда будет подставляться содержимое формы через JavaScript -->
-            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- Слайдер -->
     <section class="slider-section">
         <div class="slider">
-            <!-- Слайд 1 -->
             <div class="slide active" id="slide1">
                 <div class="container">
                     <div class="slide-content">
                         <h1>Тракторные запчасти</h1>
                         <p>Всегда в наличии: косилки, режущие аппараты, грабли, куны, картофелекопалки, ножи и запчасти к ним.</p>
-                        <a href="#" class="cta-button request-btn">Отправить заявку</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="images/traktor.jpg" alt="Трактор в поле">
+                        <a href="#" class="cta-button request-btn">Оформить заказ</a>
                     </div>
                 </div>
             </div>
-            <!-- Слайд 2 -->
             <div class="slide" id="slide2">
                 <div class="container">
                     <div class="slide-content">
                         <h1>Запчасти для сельхозтехники</h1>
                         <p>Широкий ассортимент для косилок, грабель, пресс-подборщиков и другого оборудования.</p>
-                        <a href="#" class="cta-button request-btn">Отправить заявку</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="images/ch.jpg" alt="Сельхозтехника">
+                        <a href="#" class="cta-button request-btn">Оформить заказ</a>
                     </div>
                 </div>
             </div>
-            <!-- Слайд 3 -->
             <div class="slide" id="slide3">
                 <div class="container">
                     <div class="slide-content">
                         <h1>Запчасти спецтехники</h1>
                         <p>Гидравлика, фильтры, навесное оборудование для погрузчиков и экскаваторов.</p>
-                        <a href="#" class="cta-button request-btn">Отправить заявку</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="images/spec.png" alt="Спецтехника">
+                        <a href="#" class="cta-button request-btn">Оформить заказ</a>
                     </div>
                 </div>
             </div>
@@ -949,62 +1064,114 @@
         </div>
     </section>
 
-    <!-- Преимущества -->
-    <section>
+    <section class="article-section">
         <div class="container">
-            <h2>Наши преимущества</h2>
+            <div class="article-grid">
+                <div class="article-content">
+                    <h3>Тракторные запчасти: надежность и долговечность вашей техники</h3>
+                    <p>Трактор — это сердце любого сельскохозяйственного предприятия. От его бесперебойной работы напрямую зависит своевременность посевной, качество обработки полей и скорость сбора урожая. В компании «Спутник» мы понимаем, что простой трактора из-за поломки может обернуться серьезными убытками. Именно поэтому наш склад в Иркутске всегда располагает широчайшим ассортиментом запчастей для всех популярных марок тракторов: МТЗ, ЮМЗ, Кировец, John Deere, CASE и многих других.</p>
+                    <p>Мы предлагаем не просто детали, а гарантию восстановления работоспособности вашей техники. В нашем каталоге вы найдете все необходимое: от элементов двигателя (поршневая группа, гильзы, коленвалы) и трансмиссии (коробки передач, мосты, карданные валы) до деталей ходовой части и навесного оборудования. Особое внимание мы уделяем качеству: все запчасти проходят входной контроль, а на популярные позиции мы предоставляем гарантию.</p>
+                    <p>Наши специалисты готовы оказать квалифицированную помощь в подборе аналогов, если оригинальной детали нет в наличии. Мы оперативно найдем нужную позицию у наших партнеров и доставим ее в кратчайшие сроки. Благодаря собственной логистике и отлаженной схеме работы с транспортными компаниями, мы отправляем заказы по всей России — от Калининграда до Владивостока. Доверьте ремонт своей техники профессионалам и возвращайтесь к полевым работам без долгих простоев!</p>
+                </div>
+                <div class="article-image">
+                    <i class="fas fa-tractor"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="article-section">
+        <div class="container">
+            <div class="article-grid">
+                <div class="article-content">
+                    <h3>Запчасти для сельхозтехники: все для вашего урожая</h3>
+                    <p>Современное сельское хозяйство невозможно представить без высокопроизводительной техники: мощных комбайнов, эффективных косилок, надежных пресс-подборщиков и другого оборудования. Каждый из этих механизмов требует своевременного обслуживания и качественного ремонта. ГК «Спутник» предлагает комплексные решения по поставке запасных частей для самого разнообразного сельскохозяйственного оборудования, работающего в полях и фермерских хозяйствах.</p>
+                    <p>В нашем ассортименте — тысячи наименований: режущие аппараты и ножи для косилок (КРН, КДН, КС и импортные аналоги), битеры, подшипники и шнеки для зерноуборочных комбайнов, иглы, плунжеры и вязальные аппараты для пресс-подборщиков, а также граблины, роторы и многое другое. Мы сотрудничаем с ведущими производителями, что позволяет нам гарантировать высокое качество и износостойкость деталей даже в условиях интенсивной эксплуатации.</p>
+                    <p>Особенность работы с нами — индивидуальный подход. Если вам требуется редкая запчасть или компонент для специфической модели техники, наши менеджеры проведут детальный поиск по базам поставщиков. Мы ценим время наших клиентов, поэтому стремимся обрабатывать заявки максимально быстро и предлагать оптимальные варианты по срокам и бюджету. Обращаясь в «Спутник», вы получаете надежного партнера, заинтересованного в том, чтобы ваша техника работала без перебоев, обеспечивая высокие урожаи.</p>
+                </div>
+                <div class="article-image">
+                    <i class="fas fa-combine"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- УЛУЧШЕННЫЙ БЛОК ПРЕИМУЩЕСТВ -->
+    <section class="advantages-section">
+        <div class="container">
+            <h2 class="section-title">Наши преимущества</h2>
+            <p class="section-subtitle">Почему клиенты выбирают нас на протяжении многих лет</p>
+            
             <div class="advantages-grid">
                 <div class="advantage-card">
-                    <div class="number" style="color: #3a4e62;">1</div>
+                    <div class="advantage-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
                     <h3>Склад в Иркутске</h3>
-                    <p>Всегда в наличии популярные позиции. Отгрузка день в день.</p>
+                    <p>Всегда в наличии популярные позиции. Отгрузка день в день. Быстрый самовывоз и оперативная комплектация заказов.</p>
                 </div>
+                
                 <div class="advantage-card">
-                    <div class="number" style="color: #3a4e62;">2</div>
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
                     <h3>Команда специалистов</h3>
-                    <p>Поможем подобрать аналоги и редкие запчасти для любой техники.</p>
+                    <p>Поможем подобрать аналоги и редкие запчасти для любой техники. Опытные консультации по подбору деталей.</p>
                 </div>
+                
                 <div class="advantage-card">
-                    <div class="number" style="color: #3a4e62;">3</div>
+                    <div class="advantage-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
                     <h3>Доставка по всей России</h3>
-                    <p>Собственная логистика и партнеры с ТК. Отправляем быстро.</p>
+                    <p>Собственная логистика и партнеры с ТК. Отправляем быстро в любой регион. Отслеживание груза онлайн.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Отзывы -->
-    <section>
+    <!-- УЛУЧШЕННЫЙ БЛОК ОТЗЫВОВ -->
+    <section class="reviews-section">
         <div class="container">
-            <h2>Отзывы наших клиентов</h2>
-            <p class="section-description">Видео и скриншоты благодарственных писем</p>
+            <div class="reviews-header">
+                <h2>Отзывы наших клиентов</h2>
+                <p>Видео и скриншоты благодарственных писем</p>
+            </div>
+            
             <div class="reviews-grid">
                 <div class="review-card">
-                    <div class="review-media"><i class="fas fa-file-image"></i></div>
-                    <p>«Огромное спасибо за быструю поставку гидроцилиндров! Всё подошло идеально.»</p>
-                    <div class="review-author">ООО "Рассвет"</div>
+                    <div class="review-media">
+                        <i class="fas fa-file-image"></i>
+                    </div>
+                    <p>«Огромное спасибо за быструю поставку гидроцилиндров! Всё подошло идеально, качество отличное. Будем обращаться еще.»</p>
+                    <div class="review-author">ООО "Рассвет", Иркутская обл.</div>
                 </div>
+                
                 <div class="review-card">
-                    <div class="review-media"><i class="fas fa-video"></i></div>
-                    <p>«Видеообзор полученных запчастей. Качество отличное, рекомендуем!»</p>
-                    <div class="review-author">КФХ "Сибиряк"</div>
+                    <div class="review-media">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <p>«Видеообзор полученных запчастей. Качество отличное, упаковка надежная, все соответствует заказу. Рекомендуем!»</p>
+                    <div class="review-author">КФХ "Сибиряк", Красноярский край</div>
                 </div>
+                
                 <div class="review-card">
-                    <div class="review-media"><i class="fas fa-file-pdf"></i></div>
-                    <p>«Благодарственное письмо за сотрудничество. Всегда оперативно и честно.»</p>
-                    <div class="review-author">АО "Агро-Плюс"</div>
+                    <div class="review-media">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <p>«Благодарственное письмо за сотрудничество. Всегда оперативно и честно. Надежный партнер для нашего хозяйства.»</p>
+                    <div class="review-author">АО "Агро-Плюс", Новосибирская обл.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Футер -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>СПУТНИК</h3>
-                    <p style="color: #b8d4f0;">Вместе мы вращаем мир! Поставки подшипников и запчастей с 2003 года.</p>
+                    <p style="color: #b8d4f0; line-height: 1.6;">Запчасти для сельхоз техники с 2003 года. Надежность и качество. Работаем по всей России.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
@@ -1019,10 +1186,10 @@
                 <div class="footer-column">
                     <h3>Информация</h3>
                     <ul>
-                        <li><a href="#">Ассортимент товаров</a></li>
-                        <li><a href="#">Сфера применения</a></li>
-                        <li><a href="#">Доставка и оплата</a></li>
-                        <li><a href="#">Наши клиенты</a></li>
+                        <li><a href="catalog.html">Каталог товаров</a></li>
+                        <li><a href="application.html">Сфера применения</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="clients.html">Наши клиенты</a></li>
                     </ul>
                 </div>
             </div>
@@ -1033,7 +1200,6 @@
     </footer>
 
     <script>
-        // Слайдер
         let slideIndex = 1;
         showSlide(slideIndex);
 
@@ -1052,31 +1218,28 @@
             dots[slideIndex-1].classList.add('active');
         }
 
-        // Автопереключение
         setInterval(() => {
             slideIndex++;
             showSlide(slideIndex);
         }, 6000);
 
-        // МОДАЛЬНОЕ ОКНО
         const modal = document.getElementById('universalModal');
         const modalContent = document.getElementById('modalContent');
         const closeModal = document.getElementById('closeModal');
         
-        // Функция для открытия модалки с определенной формой
         function openModal(formType) {
             if (formType === 'call') {
                 modalContent.innerHTML = `
                     <h2>Заказать звонок</h2>
                     <p class="section-description">Оставьте номер — мы перезвоним в рабочее время</p>
-                    <form id="callForm">
+                    <form id="callForm" action="https://formspree.io/f/your-form-id" method="POST">
                         <div class="form-group">
                             <label for="call-name">Имя *</label>
-                            <input type="text" id="call-name" required placeholder="Александр">
+                            <input type="text" id="call-name" name="name" required placeholder="Александр">
                         </div>
                         <div class="form-group">
                             <label for="call-phone">Телефон *</label>
-                            <input type="tel" id="call-phone" required placeholder="+7 (___) ___-__-__">
+                            <input type="tel" id="call-phone" name="phone" required placeholder="+7 (___) ___-__-__">
                         </div>
                         <div class="form-group checkbox">
                             <input type="checkbox" id="call-consent" checked required>
@@ -1087,26 +1250,26 @@
                 `;
             } else if (formType === 'request') {
                 modalContent.innerHTML = `
-                    <h2>Отправить заявку</h2>
+                    <h2>Оформить заказ</h2>
                     <p class="section-description">Заполните форму, мы свяжемся для уточнения деталей</p>
-                    <form id="requestForm">
+                    <form id="requestForm" action="https://formspree.io/f/your-form-id" method="POST">
                         <div class="form-group">
                             <label for="req-name">Имя *</label>
-                            <input type="text" id="req-name" required placeholder="Александр">
+                            <input type="text" id="req-name" name="name" required placeholder="Александр">
                         </div>
                         <div class="form-group">
                             <label for="req-phone">Телефон *</label>
-                            <input type="tel" id="req-phone" required placeholder="+7 (___) ___-__-__">
+                            <input type="tel" id="req-phone" name="phone" required placeholder="+7 (___) ___-__-__">
                         </div>
                         <div class="form-group">
                             <label for="req-message">Опишите ваш запрос</label>
-                            <textarea id="req-message" rows="3" placeholder="Модель техники, артикулы, необходимость подбора..."></textarea>
+                            <textarea id="req-message" name="message" rows="3" placeholder="Модель техники, артикулы, необходимость подбора..."></textarea>
                         </div>
                         <div class="form-group checkbox">
                             <input type="checkbox" id="req-consent" checked required>
                             <label for="req-consent">Согласие на обработку персональных данных</label>
                         </div>
-                        <button type="submit" class="cta-button">Отправить заявку</button>
+                        <button type="submit" class="cta-button">Оформить заказ</button>
                     </form>
                 `;
             }
@@ -1114,7 +1277,6 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Добавляем обработчики для новых форм
             if (formType === 'call') {
                 document.getElementById('callForm').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1128,7 +1290,7 @@
                 document.getElementById('requestForm').addEventListener('submit', function(e) {
                     e.preventDefault();
                     const name = document.getElementById('req-name').value;
-                    alert(`Спасибо, ${name}! Ваша заявка принята, мы свяжемся с вами для уточнения.`);
+                    alert(`Спасибо, ${name}! Ваш заказ принят, мы свяжемся с вами для уточнения.`);
                     this.reset();
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
@@ -1136,13 +1298,11 @@
             }
         }
         
-        // Кнопка "Заказать звонок"
         document.getElementById('callButton').addEventListener('click', function(e) {
             e.preventDefault();
             openModal('call');
         });
         
-        // Все кнопки "Отправить заявку" в слайдере
         document.querySelectorAll('.request-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1150,13 +1310,11 @@
             });
         });
         
-        // Закрыть модальное окно (крестик)
         closeModal.addEventListener('click', function() {
             modal.classList.remove('active');
             document.body.style.overflow = '';
         });
         
-        // Закрыть модальное окно при клике вне его
         window.addEventListener('click', function(e) {
             if (e.target === modal) {
                 modal.classList.remove('active');
@@ -1164,7 +1322,6 @@
             }
         });
 
-        // Закрытие модального окна при нажатии Esc
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 modal.classList.remove('active');
@@ -1172,7 +1329,6 @@
             }
         });
 
-        // МОБИЛЬНОЕ МЕНЮ
         const burgerIcon = document.getElementById('burgerIcon');
         const navMenu = document.getElementById('navMenu');
         const overlay = document.getElementById('overlay');
@@ -1202,21 +1358,15 @@
             }
         });
 
-        // Актуальный год
-        document.querySelector('.copyright p').innerHTML = `© 2003–${new Date().getFullYear()} ГК «Спутник» | Иркутск, ул. Трактовая, 18Д`;
+        const yearSpan = document.querySelector('.copyright p');
+        if (yearSpan) {
+            yearSpan.innerHTML = `© 2003–${new Date().getFullYear()} ГК «Спутник» | Иркутск, ул. Трактовая, 18Д`;
+        }
 
-        // Плавный скролл (только для якорных ссылок, которые не являются кнопками форм)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]:not(.dropdown-toggle):not(#callButton):not(.request-btn)').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
-                if (this.classList.contains('dropdown-toggle') || 
-                    this.id === 'callButton' || 
-                    this.classList.contains('request-btn')) {
-                    return;
-                }
-                
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
